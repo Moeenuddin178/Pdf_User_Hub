@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_area"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fragments will go in this area -->
+    <ImageView
+        android:src="@drawable/splash_screen"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"
+        />
+
+
+</RelativeLayout>

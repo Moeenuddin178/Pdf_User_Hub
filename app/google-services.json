@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "931608572268",
+    "firebase_url": "https://books-hub-3964a-default-rtdb.firebaseio.com",
+    "project_id": "books-hub-3964a",
+    "storage_bucket": "books-hub-3964a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931608572268:android:1b98a970297b8aac898349",
+        "android_client_info": {
+          "package_name": "com.booksHub.example.pdf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931608572268-f0e9v13vp20l806ukukaojtsobums303.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.booksHub.example.pdf",
+            "certificate_hash": "fe1c421a1edf2255b858ad071f3bfe0c1a5fb483"
+          }
+        },
+        {
+          "client_id": "931608572268-1evjn7vv8s0qdp04ssgag134bph7ii3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkSNTEaUBc1E6jB0FleKt9Xhp1S9fzW7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931608572268-1evjn7vv8s0qdp04ssgag134bph7ii3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
