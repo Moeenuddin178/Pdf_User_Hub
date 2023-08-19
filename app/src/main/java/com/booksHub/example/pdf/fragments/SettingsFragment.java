@@ -3,9 +3,11 @@ package com.booksHub.example.pdf.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +31,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SettingsFragment extends Fragment {
 
     private static final int GOOGLE_SIGN_IN_CODE = 212;     //  Detect Intent Callback

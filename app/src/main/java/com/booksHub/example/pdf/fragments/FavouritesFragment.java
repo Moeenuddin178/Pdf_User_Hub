@@ -25,9 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FavouritesFragment extends Fragment {
 
     private List<Wallpaper> favWallpaperList;
@@ -74,7 +71,7 @@ public class FavouritesFragment extends Fragment {
 
         pbFavourites.setVisibility(View.VISIBLE);
 
-        dbFavouriteWallpapers.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbFavouriteWallpapers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

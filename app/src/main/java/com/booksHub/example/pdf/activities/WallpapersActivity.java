@@ -106,7 +106,7 @@ public class WallpapersActivity extends AppCompatActivity {
     //  Fetch users favourite wallpapers from category
     private void fetchFavouriteWallpapers(final String category) {
         wallProgress.setVisibility(View.VISIBLE);
-        dbFavourites.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbFavourites.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 wallProgress.setVisibility(View.GONE);
@@ -139,7 +139,7 @@ public class WallpapersActivity extends AppCompatActivity {
     //  Fetch all the wallpapers of the category
     private void fetchWallpapers(final String category) {
         wallProgress.setVisibility(View.VISIBLE);
-        dbWallpapers.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbWallpapers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 wallProgress.setVisibility(View.GONE);

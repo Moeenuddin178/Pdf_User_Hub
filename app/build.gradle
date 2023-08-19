@@ -28,7 +28,7 @@ ext {
     //  Version For android libraries
     support_library_version = '27.1.1'
 
-    firebase_google_version = '15.0.0'
+    firebase_google_version = '19.0.0'
 }
 
 dependencies {
@@ -48,7 +48,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:$firebase_google_version"
     implementation "com.google.firebase:firebase-ads:$firebase_google_version"
     implementation "com.google.firebase:firebase-core:$firebase_google_version"
-
+    implementation "com.google.firebase:firebase-storage:$firebase_google_version"
     //  Other Libraries
     implementation 'com.github.bumptech.glide:glide:4.3.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'

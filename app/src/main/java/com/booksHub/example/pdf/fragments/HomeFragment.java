@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         //  Refer to the categories node in the DB
         dbCategories = FirebaseDatabase.getInstance("https://books-hub-3964a-default-rtdb.firebaseio.com/").getReference("categories");
-        dbCategories.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbCategories.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

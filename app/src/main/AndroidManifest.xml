@@ -10,6 +10,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
+        android:largeHeap="true"
         android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_wallpaper_hub"
@@ -33,6 +34,9 @@
         </activity>
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.WallpapersActivity" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
 
 </manifest>

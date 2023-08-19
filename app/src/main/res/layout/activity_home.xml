@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/motion_layout"
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
     <!-- Top -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/home_appbar"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,12 +37,14 @@
         android:id="@+id/my_pager"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
+        android:visibility="gone"
         android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_appbar" />
 
     <com.google.android.material.tabs.TabLayout
+        android:visibility="gone"
         android:id="@+id/my_tablayout"
         android:layout_width="0dp"
         android:layout_height="20dp"

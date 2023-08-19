@@ -21,6 +21,12 @@ import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -42,6 +48,7 @@ public class ViewerPdf extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     String themkey;
     boolean nightMode;
+    private int progr = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +83,42 @@ public class ViewerPdf extends AppCompatActivity {
             Toast.makeText(ViewerPdf.this, "Link Not Available", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            load(pdf);
+            //DownloadWithFirebase();
+                 load(pdf);
         }
     }
+
+//    private void DownloadWithFirebase() {
+//        StorageReference referenceFromUrl = FirebaseStorage.getInstance().getReferenceFromUrl("gs://books-hub-3964a.appspot.com/Black/Hilt/1692622444676.pdf");
+//        File file = new File(getApplicationContext().getFilesDir(), "java101.pdf");
+//        if (file.exists()) {
+////            this.progressBar.setVisibility(8);
+//            Toast.makeText(this, "Exits", Toast.LENGTH_SHORT).show();
+//        }
+//        referenceFromUrl.getFile(file).addOnSuccessListener((OnSuccessListener) new OnSuccessListener<FileDownloadTask.TaskSnapshot>() { // from class: net.androidsquad.androidmaster.JavaCourse.J1Details.Java1CourseDetails.3
+//            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                pb.setVisibility(View.GONE);
+//                loadPdf(file);
+//            }
+//        }).addOnFailureListener((OnFailureListener) new OnFailureListener() { // from class: net.androidsquad.androidmaster.JavaCourse.J1Details.Java1CourseDetails.2
+//            @Override // com.google.android.gms.tasks.OnFailureListener
+//            public void onFailure(Exception exc) {
+//                Toast.makeText(ViewerPdf.this, "Please Check Network Connection"+exc, Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnProgressListener((OnProgressListener) new OnProgressListener<FileDownloadTask.TaskSnapshot>() { // from class: net.androidsquad.androidmaster.JavaCourse.J1Details.Java1CourseDetails.1
+//            public void onProgress(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                ViewerPdf java1CourseDetails = ViewerPdf.this;
+//                double bytesTransferred = (double) taskSnapshot.getBytesTransferred();
+//                Double.isNaN(bytesTransferred);
+//                double totalByteCount = (double) taskSnapshot.getTotalByteCount();
+//                Double.isNaN(totalByteCount);
+//                java1CourseDetails.progr = (int) ((bytesTransferred * 100.0d) / totalByteCount);
+//                pb.setProgress(ViewerPdf.this.progr);
+//            }
+//        });
+//
+//
+//    }
 
     private void load(String link) {
 
@@ -102,11 +142,14 @@ public class ViewerPdf extends AppCompatActivity {
         new Thread(() ->
         {
 
-            String fileNamea = link.substring(link.lastIndexOf('-') + 1, link.length());
+            File filePath=getFilesDir();
+            String fileNamea = link.substring(link.lastIndexOf('=') + 1, link.length());
+          //  String fileNamea = link.substring(link.lastIndexOf('-') + 1, link.length());
 
             //   String fileNameWithoutExtn = fileNamea.substring(0, fileNamea.lastIndexOf('.'));
             // do background stuff here
-            String filePath = getExternalCacheDir().getAbsolutePath();
+            // String filePath = getExternalCacheDir().getAbsolutePath();
+            //String filePath = getExternalCacheDir().getAbsolutePath();
             String fileName = "file" + fileNamea + ".pdf";
             file = new File(filePath, fileName);
             if (file.exists()) {
@@ -118,22 +161,7 @@ public class ViewerPdf extends AppCompatActivity {
                 }
                 runOnUiThread(() -> {
 
-                    pdfView.fromFile(file)
-                            .enableSwipe(true)
-                            .swipeHorizontal(false)
-                            .spacing(3)
-                            .scrollHandle(new DefaultScrollHandle(this))
-                            .pageFitPolicy(FitPolicy.BOTH)
-                            .enableAntialiasing(true)
-                            .nightMode(nightMode)
-                            .onLoad(new OnLoadCompleteListener() {
-                                @Override
-                                public void loadComplete(int nbPages) {
-                                    pb.setVisibility(View.GONE);
-                                    //  Toast.makeText(ViewerPdf.this, "complete", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .load();
+                    loadPdf(file);
 
                 });
             } else {
@@ -178,9 +206,9 @@ public class ViewerPdf extends AppCompatActivity {
                 InputStream finalInputStream = inputStream;
                 long fileSizeInKB = length / 1024;
 
-                String filePaths = getExternalCacheDir().getAbsolutePath();
+               // String filePaths = getExternalCacheDir().getAbsolutePath();
                 String fileNames = "file" + fileNamea + ".pdf";
-                file = new File(filePaths, fileNames);
+                file = new File(filePath, fileNames);
                 copyInputStreamToFile(finalInputStream, file);
 
                 runOnUiThread(() -> {
@@ -263,39 +291,26 @@ public class ViewerPdf extends AppCompatActivity {
         }
     }
 
-    //        webView = (WebView) findViewById(R.id.pdfViews);
-//        webView.getSettings().setJavaScriptEnabled(true);
-//
-//        //if your filename and fileurl content holder is not named 'filename' and 'fileurl' then change the below name to exactly what it is named
-//        String filename = getIntent().getStringExtra("filename");
-//        String fileurl = getIntent().getStringExtra("fileurl");
-//
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setTitle("filename");
-//        progressDialog.setMessage("Opening...!!!");
-//
-//        webView.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//                super.onPageStarted(view, url, favicon);
-//                progressDialog.show();
-//            }
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-//                progressDialog.dismiss();
-//            }
-//        });
-//
-//        String url = "";
-//        ;
-//        try {
-//
-//            url = URLEncoder.encode(pdf, "UTF-8");
-//        } catch (Exception ex) {
-//
-//        }
+
+    private void loadPdf(File file) {
+
+        pdfView.fromFile(file)
+                .enableSwipe(true)
+                .swipeHorizontal(false)
+                .spacing(3)
+                .scrollHandle(new DefaultScrollHandle(this))
+                .pageFitPolicy(FitPolicy.BOTH)
+                .enableAntialiasing(true)
+                .nightMode(nightMode)
+                .onLoad(new OnLoadCompleteListener() {
+                    @Override
+                    public void loadComplete(int nbPages) {
+                        pb.setVisibility(View.GONE);
+                        //  Toast.makeText(ViewerPdf.this, "complete", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .load();
+    }
 //
 //        webView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + url);
 }
